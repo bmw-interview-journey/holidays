@@ -1,0 +1,9 @@
+Requirements: 
+
+1. Add New Feature
+1.1. Add a new endpoint where you can fetch a collection of holidays the company needs to cater for in a year which is returned as collection of type HolidayDto. 
+1.2. If company holidays land on a public holiday or the weekend it needs to be moved to the next available work day (Monday - Friday)
+1.3. The collection should be ordered by date
+1.4. This endpoint should have the route 'api/DaysOff/[year]' 
+
+2. Fix the Holiday Controller public methods. The get methods are throwing exceptions and both endpoints need to be working

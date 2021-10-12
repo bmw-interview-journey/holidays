@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holidays", "Holidays\Holidays.csproj", "{A9A440E3-8C0B-4EA6-B164-A05EDEBC8FEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holidays.IntegrationTests", "Holidays.IntegrationTests\Holidays.IntegrationTests.csproj", "{6038EC1B-FB87-4BD2-BF2D-E640F72E4180}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holidays.Data", "Holidays.Data\Holidays.Data.csproj", "{291D552B-B96F-47E0-A67F-4D69313D2997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F9CAB8D-4954-43EB-8D51-23A4AEAE5EE7}"
+	ProjectSection(SolutionItems) = preProject
+		Requirements.txt = Requirements.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9A440E3-8C0B-4EA6-B164-A05EDEBC8FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A440E3-8C0B-4EA6-B164-A05EDEBC8FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A440E3-8C0B-4EA6-B164-A05EDEBC8FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A440E3-8C0B-4EA6-B164-A05EDEBC8FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6038EC1B-FB87-4BD2-BF2D-E640F72E4180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6038EC1B-FB87-4BD2-BF2D-E640F72E4180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6038EC1B-FB87-4BD2-BF2D-E640F72E4180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6038EC1B-FB87-4BD2-BF2D-E640F72E4180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291D552B-B96F-47E0-A67F-4D69313D2997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291D552B-B96F-47E0-A67F-4D69313D2997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291D552B-B96F-47E0-A67F-4D69313D2997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291D552B-B96F-47E0-A67F-4D69313D2997}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7332A884-DB43-436D-9F0D-0EB54C78AF7D}
+	EndGlobalSection
+EndGlobal
