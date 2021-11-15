@@ -2,6 +2,7 @@
 using Holidays.Model;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Holidays.IntegrationTests.Setup;
@@ -11,10 +12,17 @@ namespace Holidays.IntegrationTests
     [TestFixture]
     public class DaysOffControllerTests : IntegrationTest
     {
+        [Test]
+        public async Task _1_2_Correct_Endpoint_Exposed()
+        {
+            var response = await TestClient.GetAsync($"api/DaysOff/2020");
+            Assert.AreNotEqual(HttpStatusCode.NotFound, response.StatusCode);
+        }
+        
         [TestCase(2021)]
         [TestCase(2020)]
         [TestCase(2019)]
-        public async Task Get_DaysOff_For_Year_Called_Successfully(int year)
+        public async Task _1_3_Company_Holidays_Are_Moved_To_Next_Available_Work_Day_Successfully(int year)
         {
             var expectedWorkHolidaysDays = GetExpectedResults(year);
 
@@ -24,15 +32,52 @@ namespace Holidays.IntegrationTests
 
             var holidays = await ConvertResponse(response);
 
+            foreach (var holiday in holidays)
+            {
+                var expectedHoliday = expectedWorkHolidaysDays.FirstOrDefault(day => day.holiday.Name == holiday.Name).holiday;
+                
+                if(expectedHoliday is null)
+                    continue;
+                
+                Assert.AreEqual(
+                    expectedHoliday.Date, holiday.Date,
+                    $"Expected Holiday '{holiday.Name}' to be on date '{expectedHoliday.Date:dd/MM/yyyy} {expectedHoliday.Date.DayOfWeek}' but was on date '{holiday.Date:dd/MM/yyyy} {holiday.Date.DayOfWeek}'");
+            }
+        }
+        
+        [TestCase(2021)]
+        [TestCase(2020)]
+        [TestCase(2019)]
+        public async Task _1_4_Correct_Number_Of_Holidays_Returned_Successfully(int year)
+        {
+            var expectedWorkHolidaysDays = GetExpectedResults(year);
+
+            var response = await TestClient.GetAsync($"api/DaysOff/{year}");
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            var holidays = await ConvertResponse(response);
             Assert.AreEqual(19, holidays.Count);
+        }
+        
+        [TestCase(2021)]
+        [TestCase(2020)]
+        [TestCase(2019)]
+        public async Task _1_5_Holidays_Are_Ordered_Ascending_Date_Successfully(int year)
+        {
+            var expectedWorkHolidaysDays = GetExpectedResults(year);
+
+            var response = await TestClient.GetAsync($"api/DaysOff/{year}");
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            var holidays = await ConvertResponse(response);
+            
             foreach (var (holiday, index) in expectedWorkHolidaysDays)
             {
                 Assert.AreEqual(
                     holiday.Name, holidays[index].Name,
-                    $"Expected Holiday name to be '{holiday.Name}' but was '{holidays[index].Name}'");
-                Assert.AreEqual(
-                    holiday.Date, holidays[index].Date,
-                    $"Expected Holiday '{holiday.Name}' to be on date '{holiday.Date:dd/MM/yyyy} {holiday.Date.DayOfWeek}' but was on date '{holidays[index].Date:dd/MM/yyyy} {holidays[index].Date.DayOfWeek}'");
+                    $"Expected Holiday '{holiday.Name}' to be at index {index} in the holiday collection");
             }
         }
 

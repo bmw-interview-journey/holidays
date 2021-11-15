@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Holidays.Controllers
 {
-    [Route("api/Holidays")]
+    [Route("api/holidays")]
     public class HolidaysController : Controller
     {
         private readonly IPublicHolidayService _publicHolidayService;

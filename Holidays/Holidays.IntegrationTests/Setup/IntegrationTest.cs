@@ -16,9 +16,9 @@ namespace Holidays.IntegrationTests.Setup
     public class IntegrationTest
     {
         protected readonly HttpClient TestClient;
-        protected readonly IServiceProvider ServiceProvider;
+        private readonly IServiceProvider _serviceProvider;
 
-        public IntegrationTest()
+        protected IntegrationTest()
         {
             var appFactory = new WebApplicationFactory<Startup>().WithWebHostBuilder(builder =>
             {
@@ -30,14 +30,14 @@ namespace Holidays.IntegrationTests.Setup
             });
             TestClient = appFactory.CreateClient();
 
-            ServiceProvider = appFactory.Services;
+            _serviceProvider = appFactory.Services;
 
             SeedDb();
         }
 
         private void SeedDb()
         {
-            using var scope = ServiceProvider.CreateScope();
+            using var scope = _serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<HolidayContext>();
             context.Holidays.Add(new Holiday { Id = Guid.NewGuid(), Name = HolidayNames.InceptionDay, Date = new DateTime(1992, 04, 05) });
             context.Holidays.Add(new Holiday { Id = Guid.NewGuid(), Name = HolidayNames.JeffsBirthday, Date = new DateTime(1992, 03, 26) });
@@ -49,7 +49,7 @@ namespace Holidays.IntegrationTests.Setup
             context.SaveChanges();
         }
 
-        protected async Task<IList<HolidayDto>> ConvertResponse(HttpResponseMessage response)
+        protected static async Task<IList<HolidayDto>> ConvertResponse(HttpResponseMessage response)
         {
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
