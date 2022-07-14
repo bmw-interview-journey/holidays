@@ -37,10 +37,9 @@ namespace Holidays.Controllers
             return Ok(holidays);
         }
 
-        [HttpGet("{month}")]
-        public async Task<IActionResult> GetByMonth(int month)
+        [HttpGet("{year}/{month}")]
+        public async Task<IActionResult> GetByMonth(int year, int month)
         {
-            var year = 2021;
             var holidays = new List<HolidayDto>();
             var publicHolidays = await _publicHolidayService.GetByMonthAsync(year, month);
             var workHolidays = (await _holidayContext.Holidays.ToListAsync()).Where(holiday => holiday.Date.Month == month);

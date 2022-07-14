@@ -23,7 +23,7 @@ namespace Holidays.IntegrationTests
         [Test]
         public async Task _2_Get_Holidays_By_Month_Called_Successfully()
         {
-            var response = await TestClient.GetAsync("api/holidays/month/04");
+            var response = await TestClient.GetAsync("api/holidays/2021/04");
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
