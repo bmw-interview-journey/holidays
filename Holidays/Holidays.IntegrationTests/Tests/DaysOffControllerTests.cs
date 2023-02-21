@@ -99,7 +99,7 @@ namespace Holidays.IntegrationTests.Tests
                         (new HolidayDto(new DateTime(2020, 04, 06), HolidayNames.InceptionDay), 4),
                         (new HolidayDto(new DateTime(2020, 03, 26), HolidayNames.JeffsBirthday), 3),
                         (new HolidayDto(new DateTime(2020, 10, 13), HolidayNames.MsIgniteDay), 15),
-                        (new HolidayDto(new DateTime(2020, 08, 10), HolidayNames.PolkadotDay), 13),
+                        (new HolidayDto(new DateTime(2020, 08, 11), HolidayNames.PolkadotDay), 13),
                         (new HolidayDto(new DateTime(2020, 01, 20), HolidayNames.CreativeDay), 1),
                         (new HolidayDto(new DateTime(2020, 07, 20), HolidayNames.SpaceDay), 11),
                         (new HolidayDto(new DateTime(2020, 04, 28), HolidayNames.BmwDay), 8)
