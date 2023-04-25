@@ -13,16 +13,33 @@ namespace Holidays.IntegrationTests.Tests
     public class DaysOffControllerTests 
     {
         [Test]
-        public async Task _1_2_Correct_Endpoint_Exposed()
+        public async Task Acceptance_Criteria_1_Correct_Endpoint_Exposed()
         {
             var response = await IntegrationTestContext.TestClient.GetAsync($"api/DaysOff/2020");
             Assert.AreNotEqual(HttpStatusCode.NotFound, response.StatusCode);
         }
         
+        [Test]
+        public async Task Acceptance_Criteria_2_Holidays_Returned_In_Correct_Type()
+        {
+            var response = await IntegrationTestContext.TestClient.GetAsync($"api/DaysOff/2020");
+            Assert.AreNotEqual(HttpStatusCode.NotFound, response.StatusCode);
+            
+            var holidays = await response.ToHolidaysAsync();
+            
+            Assert.IsTrue(holidays.Any());
+
+            foreach (var holiday in holidays)
+            {
+                Assert.AreNotEqual(string.Empty, holiday.Name);
+                Assert.AreNotEqual(new DateTime(), holiday.Date);
+            }
+        }
+        
         [TestCase(2021)]
         [TestCase(2020)]
         [TestCase(2019)]
-        public async Task _1_3_Correct_Number_Of_Holidays_Returned_Successfully(int year)
+        public async Task Acceptance_Criteria_3_Correct_Number_Of_Holidays_Returned(int year)
         {
             var response = await IntegrationTestContext.TestClient.GetAsync($"api/DaysOff/{year}");
 
@@ -35,7 +52,7 @@ namespace Holidays.IntegrationTests.Tests
         [TestCase(2021)]
         [TestCase(2020)]
         [TestCase(2019)]
-        public async Task _1_4_Company_Holidays_Are_Moved_To_Next_Available_Work_Day_Successfully(int year)
+        public async Task Acceptance_Criteria_4_Company_Holidays_Are_Moved_To_Next_Available_Work_Day(int year)
         {
             var expectedWorkHolidaysDays = GetExpectedResults(year);
 
@@ -61,7 +78,7 @@ namespace Holidays.IntegrationTests.Tests
         [TestCase(2021)]
         [TestCase(2020)]
         [TestCase(2019)]
-        public async Task _1_5_Holidays_Are_Ordered_Ascending_Date_Successfully(int year)
+        public async Task Acceptance_Criteria_5_Holidays_Are_Ordered_By_Date_Ascending(int year)
         {
             var expectedWorkHolidaysDays = GetExpectedResults(year);
 

@@ -9,7 +9,7 @@ namespace Holidays.IntegrationTests.Tests
     public class HolidaysControllerTests
     {
         [Test]
-        public async Task _2_Get_Holidays_By_Year_Called_Successfully()
+        public async Task Get_Holidays_By_Year_Called_Successfully()
         {
             var response = await IntegrationTestContext.TestClient.GetAsync("api/holidays/2021");
 
@@ -21,7 +21,7 @@ namespace Holidays.IntegrationTests.Tests
         }
 
         [Test]
-        public async Task _2_Get_Holidays_By_Month_Called_Successfully()
+        public async Task Get_Holidays_By_Month_Called_Successfully()
         {
             var response = await IntegrationTestContext.TestClient.GetAsync("api/holidays/2021/04");
 
